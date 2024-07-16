@@ -1,21 +1,18 @@
-/**
- * launchscreen
- */
-
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FlutterLogo(size: 100), // Replace with your logo
-            SizedBox(height: 20),
-            CircularProgressIndicator(),
-          ],
+        child: Text(
+          'BoB',
+          style: TextStyle(
+            fontSize: 40,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
