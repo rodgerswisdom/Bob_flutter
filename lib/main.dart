@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'src/ui/splash/launchscreen.dart';
+import 'src/ui/assessment/1.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,14 +14,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreenWrapper(),
+      home: SplashScreenWrapper(),
     );
   }
 }
 
 class SplashScreenWrapper extends StatefulWidget {
-  const SplashScreenWrapper({super.key});
-
   @override
   _SplashScreenWrapperState createState() => _SplashScreenWrapperState();
 }
@@ -31,33 +28,31 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
+    _navigateToNextScreen();
   }
 
-  _navigateToHome() async {
-    await Future.delayed(const Duration(seconds: 100), () {});
+  _navigateToNextScreen() async {
+    await Future.delayed(Duration(seconds: 3), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => AssessmentScreen()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return const SplashScreen();
+    return SplashScreen();
   }
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My First Flutter App'),
+        title: Text('My First Flutter App'),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
           'Hello, Flutter!',
           style: TextStyle(fontSize: 24),
