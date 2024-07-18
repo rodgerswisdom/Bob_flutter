@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
 class AssessmentScreen extends StatefulWidget {
+  const AssessmentScreen({Key? key}) : super(key: key);
+
   @override
   _AssessmentScreenState createState() => _AssessmentScreenState();
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  String _selectedIncomeSource;
+  String _selectedIncomeSource = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40), // Adjust the height to your needs
+            SizedBox(height: 40), // Add some space at the top
             Text(
               'Income Information',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -34,17 +35,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             ),
             SizedBox(height: 20),
             Text(
-              'What\'s your primary source of income?',
+              'What is your primary source of Income?',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
+            Column(
               children: [
                 _buildChoiceButton('Employment'),
-                _buildChoiceButton('Self employed'),
-                _buildChoiceButton('Investment'),
+                _buildChoiceButton('Self Employed'),
+                _buildChoiceButton('Investments'),
                 _buildChoiceButton('Other'),
               ],
             ),
@@ -55,7 +54,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 onPressed: () {
                   // Handle next button press
                 },
-                child: Text('Next'),
+                child: const Text('Next'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
                   padding: EdgeInsets.symmetric(vertical: 16),
@@ -71,23 +70,23 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
   Widget _buildChoiceButton(String title) {
     final bool isSelected = _selectedIncomeSource == title;
-    return ChoiceChip(
-      label: Text(title),
-      selected: isSelected,
-      onSelected: (bool selected) {
-        setState(() {
-          _selectedIncomeSource = selected ? title : null;
-        });
-      },
-      selectedColor: Colors.blue,
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-        side: BorderSide(color: Colors.blue),
-      ),
-      labelStyle: TextStyle(
-        color: isSelected ? Colors.white : Colors.blue,
-        fontSize: 16,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: OutlinedButton(
+        onPressed: () {
+          setState(() {
+            _selectedIncomeSource = title;
+          });
+        },
+        child: Text(title),
+        style: OutlinedButton.styleFrom(
+          primary: isSelected ? Colors.white : Colors.blue,
+          backgroundColor: isSelected ? Colors.blue : Colors.white,
+          side: BorderSide(color: Colors.blue),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
       ),
     );
   }
