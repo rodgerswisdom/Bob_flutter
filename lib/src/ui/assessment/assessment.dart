@@ -56,7 +56,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 },
                 child: const Text('Next'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  backgroundColor: Colors.blue,
                   padding: EdgeInsets.symmetric(vertical: 16),
                   textStyle: TextStyle(fontSize: 18),
                 ),
@@ -80,8 +80,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         },
         child: Text(title),
         style: OutlinedButton.styleFrom(
-          primary: isSelected ? Colors.white : Colors.blue,
-          backgroundColor: isSelected ? Colors.blue : Colors.white,
+          foregroundColor: isSelected ? Colors.white : Colors.blue, backgroundColor: isSelected ? Colors.blue : Colors.white,
           side: BorderSide(color: Colors.blue),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
