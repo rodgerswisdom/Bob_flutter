@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'src/ui/splash/launchscreen.dart';
-import 'src/ui/assessment/1.dart';
+import 'src/ui/assessment/assessment.dart';
 
 void main() {
   runApp(MyApp());
