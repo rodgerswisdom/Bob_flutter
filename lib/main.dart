@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'src/ui/splash/launchscreen.dart';
-import 'src/ui/assessment/assessment.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,14 +31,14 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
   @override
   void initState() {
     super.initState();
-    _navigateToNextScreen();
+    _navigateToHome();
   }
 
-  _navigateToNextScreen() async {
-    await Future.delayed(const Duration(seconds: 3), () {});
+  _navigateToHome() async {
+    await Future.delayed(const Duration(seconds: 100), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const AssessmentScreen()),
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
     );
   }
 
