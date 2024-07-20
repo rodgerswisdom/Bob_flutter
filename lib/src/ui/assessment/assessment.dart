@@ -1,3 +1,4 @@
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class AssessmentScreen extends StatefulWidget {
@@ -26,11 +27,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             const SizedBox(height: 20),
             Row(
               children: [
-                Expanded(child: Container(height: 10, color: Colors.grey)),
-                const SizedBox(width: 8),
-                Expanded(child: Container(height: 10, color: Colors.grey)),
-                const SizedBox(width: 8),
-                Expanded(child: Container(height: 10, color: Colors.grey)),
+                Expanded(child: Container(height: 5, color: Colors.grey)),
+                const SizedBox(width: 5),
+                Expanded(child: Container(height: 5, color: Colors.grey)),
+                const SizedBox(width: 5),
+                Expanded(child: Container(height: 5, color: Colors.grey)),
               ],
             ),
             const SizedBox(height: 20),
