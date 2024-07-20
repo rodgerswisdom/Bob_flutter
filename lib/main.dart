@@ -1,8 +1,6 @@
 import 'package:bob/src/ui/assessment/assessment.dart';
 import 'package:bob/src/ui/splash/launchscreen.dart';
 import 'package:flutter/material.dart';
-import 'src/ui/splash/launchscreen.dart;
-import 'src/ui/assessment/assessment.dart;
 
 
 void main() {
@@ -21,8 +19,8 @@ class MyApp extends StatelessWidget {
       ),
      initialRoute: '/',
      routes: {
-      '/': (context) => const SplashScreen(),
-      '/home': (context) => const AssessmentScreen(),
+      '/g': (context) => const SplashScreen(),
+      '/': (context) => const AssessmentScreen(),
      },
     );
   }
