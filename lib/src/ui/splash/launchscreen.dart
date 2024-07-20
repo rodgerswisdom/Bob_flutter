@@ -19,22 +19,35 @@ class _SplashScreenState extends State<SplashScreen> {
       );
   });
   }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromRGBO(34, 89, 171,100),
       body: Center(
-        child: Text(
-          'BoB',
-          style: TextStyle(
-            fontSize: 40,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'BoB',
+              style: TextStyle(
+                fontSize: 40,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'Powered by Gemini',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.normal,
+              ),
+              ),
+            CircularProgressIndicator(),
+          ],
         ),
       ),
     );
-  }
-
-
+  } 
 }
