@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserService {
-  static const String baseUrl = 'https://api.example.com'; // Replace with your API base URL
+  static const String baseUrl = 'https://bob-server.vercel.app/'; // Replace with your API base URL
 
   static Future<bool> login(String email, String password) async {
     final response = await http.post(
