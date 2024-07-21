@@ -11,6 +11,11 @@ class UserService {
     return prefs.getString('userId');
   }
 
+  static Future<String?> getToken() async{
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
   static Future<bool> register(String email, String password, String name) async {
     try {
       final response = await http.post(
@@ -131,4 +136,6 @@ class UserService {
       return null;
     }
   }
+
+  
 }
