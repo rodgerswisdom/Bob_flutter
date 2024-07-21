@@ -1,8 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   static const String baseUrl = 'https://bob-server.vercel.app'; // Replace with your backend URL
+
+  // Get User ID from Shared Preferences
+  static Future<String?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userId');
+  }
 
   static Future<bool> register(String email, String password, String name) async {
     try {
@@ -51,6 +58,9 @@ class UserService {
 
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
+        // Save token to shared preferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', responseBody['token']);
         return responseBody;
       } else {
         final responseBody = json.decode(response.body);
@@ -78,7 +88,9 @@ class UserService {
       print('Response body: ${response.body}');
 
       if (response.statusCode == 200) {
-        // Logout successful
+        // Logout successful, remove token from shared preferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.remove('token');
         return true;
       } else {
         final responseBody = json.decode(response.body);
@@ -119,6 +131,4 @@ class UserService {
       return null;
     }
   }
-
-  static getUserId() {}
 }

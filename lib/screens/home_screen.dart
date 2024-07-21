@@ -1,7 +1,6 @@
-// TODO Implement this library.
-
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,13 +18,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final userId = await UserService.getUserId();
-    // Replace this with actual call to get user info
-    // For demonstration purposes, let's assume display name is fetched from shared preferences
-    setState(() {
-      _displayName = userId ?? 'User';
-      _isLoading = false;
-    });
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    if (token != null) {
+      final userData = await UserService.getMe(token);
+
+      setState(() {
+        if (userData != null) {
+          _displayName = userData['displayName'] ?? 'User';
+        } else {
+          _displayName = 'User';
+        }
+        _isLoading = false;
+      });
+    } else {
+      setState(() {
+        _displayName = 'User';
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -60,9 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      // Logout action
-                      Navigator.pushReplacementNamed(context, '/login');
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      final token = prefs.getString('token');
+                      if (token != null) {
+                        final success = await UserService.logout(token);
+                        if (success) {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        }
+                      }
                     },
                     child: Text('Logout'),
                   ),
