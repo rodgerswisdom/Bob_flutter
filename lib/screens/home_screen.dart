@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                     onPressed: () {
                       // Navigate to profile or settings screen
-                      Navigator.pushNamed(context, '/profile'); // Assume a profile route exists
+                      Navigator.pushNamed(context, '/me'); // Assume a profile route exists
                     },
                     child: Text('Profile'),
                   ),
