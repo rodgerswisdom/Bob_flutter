@@ -8,7 +8,7 @@ class QuestionPage extends StatefulWidget {
   final Function(String, String) onAnswerSelected;
   final Function onCompleted;
 
-  const QuestionPage({super.key, 
+  QuestionPage({
     required this.questions,
     required this.questionIds,
     required this.onAnswerSelected,
@@ -36,6 +36,9 @@ class _QuestionPageState extends State<QuestionPage> {
             'Category: ${question['category']}',
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
+          ProgressBar(
+            progress: (_currentQuestionIndex + 1) / widget.questionIds.length,
+          ),
           const SizedBox(height: 16.0),
           QuestionWidget(
             question: question,
@@ -51,9 +54,7 @@ class _QuestionPageState extends State<QuestionPage> {
             },
           ),
           const SizedBox(height: 20.0),
-          ProgressBar(
-            progress: (_currentQuestionIndex + 1) / widget.questionIds.length,
-          ),
+          
         ],
       ),
     );

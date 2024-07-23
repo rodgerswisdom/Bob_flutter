@@ -1,12 +1,7 @@
-// ignore_for_file: duplicate_import
-// This file will handle the main logic for fetching questions and navigation between question pages.
-
 import 'package:flutter/material.dart';
 import 'question_page.dart';
-import '../services/user_service2.dart';
-import '../screens/question_page.dart';
 import '../services/api_service.dart';
-
+import '../services/user_service.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -26,10 +21,14 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   }
 
   Future<void> _fetchQuestions() async {
-    final questions = await ApiService.fetchQuestions();
-    setState(() {
-      _questions = questions;
-    });
+    try {
+      final questions = await ApiService.fetchQuestions();
+      setState(() {
+        _questions = questions;
+      });
+    } catch (e) {
+      // Handle error (e.g., show an error message)
+    }
   }
 
   void _saveResponse(String questionId, String answer) {
@@ -37,9 +36,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   }
 
   void _submitResponses() async {
-    final userId = await UserService.getUserId();
-    await ApiService.submitResponses(_userResponses, userId!);
-    // Handle successful submission or navigate to a different screen
+    try {
+      final userId = await UserService.getUserId();
+      await ApiService.submitResponses(_userResponses, userId!);
+      // Handle successful submission or navigate to a different screen
+    } catch (e) {
+      // Handle error (e.g., show an error message)
+    }
   }
 
   @override

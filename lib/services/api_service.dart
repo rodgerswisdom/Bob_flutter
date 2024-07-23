@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'https://bob-server.vercel.app';
+  static const String baseUrl = 'https://bob-server.vercel.app/assessments';
 
   static Future<Map<String, dynamic>> fetchQuestions() async {
     final response = await http.get(Uri.parse('$baseUrl/questions'));
