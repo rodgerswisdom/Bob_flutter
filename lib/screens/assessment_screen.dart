@@ -7,7 +7,7 @@ class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
 
   @override
-  _AssessmentScreenState createState() => _AssessmentScreenState();
+  State<AssessmentScreen> createState() => _AssessmentScreenState();
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {

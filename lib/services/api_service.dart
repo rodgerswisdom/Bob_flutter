@@ -16,7 +16,7 @@ class ApiService {
   static Future<void> submitResponses(List<Map<String, String>> responses, String userId) async {
     final data = {'answers': responses, 'userId': userId};
     final response = await http.post(
-      Uri.parse('$baseUrl/submit'),
+      Uri.parse('$baseUrl/questions'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(data),
     );

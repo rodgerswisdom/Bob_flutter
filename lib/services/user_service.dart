@@ -16,6 +16,7 @@ class UserService {
     return prefs.getString('token');
   }
 
+
   static Future<bool> register(String email, String password, String name) async {
     try {
       final response = await http.post(

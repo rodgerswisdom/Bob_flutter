@@ -4,16 +4,19 @@ class QuestionWidget extends StatelessWidget {
   final Map<String, dynamic> question;
   final Function(String) onSelected;
 
-  QuestionWidget({required this.question, required this.onSelected});
+  const QuestionWidget({super.key,
+    required this.question,
+    required this.onSelected
+    });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           question['question'],
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         ...question['choices'].map<Widget>((choice) {
           return ElevatedButton(
