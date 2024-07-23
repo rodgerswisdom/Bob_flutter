@@ -12,13 +12,15 @@ import '../services/api_service.dart';
 import '../services/user_service.dart';
 
 class AssessmentScreen extends StatefulWidget {
+  const AssessmentScreen({super.key});
+
   @override
-  _AssessmentScreenState createState() => _AssessmentScreenState();
+  State<AssessmentScreen> createState() => _AssessmentScreenState();
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
   Map<String, dynamic> _questions = {};
-  List<Map<String, String>> _userResponses = [];
+  final List<Map<String, String>> _userResponses = [];
 
   @override
   void initState() {
@@ -55,8 +57,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   Widget build(BuildContext context) {
     if (_questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text('Assessment')),
-        body: Center(child: CircularProgressIndicator()),
+        appBar: AppBar(title: const Text('Assessment')),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 
