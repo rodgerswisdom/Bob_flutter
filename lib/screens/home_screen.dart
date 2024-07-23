@@ -3,8 +3,10 @@ import '../services/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -43,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title:const Text('Home')),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ?const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -53,24 +55,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Welcome, $_displayName!',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/assessment');
                     },
-                    child: Text('Start Assessment'),
+                    child: const Text('Start Assessment'),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
                       // Navigate to profile or settings screen
                       Navigator.pushNamed(context, '/me'); // Assume a profile route exists
                     },
-                    child: Text('Profile'),
+                    child: const Text('Profile'),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
@@ -82,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       }
                     },
-                    child: Text('Logout'),
+                    child: const Text('Logout'),
                   ),
                 ],
               ),
