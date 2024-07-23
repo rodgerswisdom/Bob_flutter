@@ -1,21 +1,18 @@
-// ignore_for_file: unused_import
+// ignore_for_file: duplicate_import
+// This file will handle the main logic for fetching questions and navigation between question pages.
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
-// ignore: duplicate_ignore
-// ignore: unused_import
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import '../widgets/progress_bar.dart';
 import 'question_page.dart';
+import '../services/user_service2.dart';
+import '../screens/question_page.dart';
 import '../services/api_service.dart';
-import '../services/user_service.dart';
+
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
 
   @override
-  State<AssessmentScreen> createState() => _AssessmentScreenState();
+  _AssessmentScreenState createState() => _AssessmentScreenState();
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
@@ -29,14 +26,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   }
 
   Future<void> _fetchQuestions() async {
-    try {
-      final questions = await ApiService.fetchQuestions();
-      setState(() {
-        _questions = questions;
-      });
-    } catch (e) {
-      // Handle error (e.g., show an error message)
-    }
+    final questions = await ApiService.fetchQuestions();
+    setState(() {
+      _questions = questions;
+    });
   }
 
   void _saveResponse(String questionId, String answer) {
@@ -44,13 +37,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   }
 
   void _submitResponses() async {
-    try {
-      final userId = await UserService.getUserId();
-      await ApiService.submitResponses(_userResponses, userId!);
-      // Handle successful submission or navigate to a different screen
-    } catch (e) {
-      // Handle error (e.g., show an error message)
-    }
+    final userId = await UserService.getUserId();
+    await ApiService.submitResponses(_userResponses, userId!);
+    // Handle successful submission or navigate to a different screen
   }
 
   @override
