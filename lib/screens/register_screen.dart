@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Call your registration API here
       final success = await UserService.register(email, password, name);
       if (success) {
-        Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/assessment');
       } else {
         // Handle registration failure
         ScaffoldMessenger.of(context).showSnackBar(
