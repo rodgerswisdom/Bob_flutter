@@ -13,7 +13,7 @@ class QuestionWidget extends StatelessWidget {
       children: [
         Text(
           question['question'],
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         ...question['choices'].map<Widget>((choice) {
           return ElevatedButton(
