@@ -33,6 +33,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
   void _saveResponse(String questionId, String answer) {
     _userResponses.add({'questionId': questionId, 'answer': answer});
+    print('questionId: $questionId, answer: $answer');
   }
 
   void _submitResponses() async {
