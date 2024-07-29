@@ -43,9 +43,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
             children: const [
               LogoScreen(),
-              Intropage1(),
-              Intropage2(),
-              Intropage3(),
+              IntroPage1(),
+              IntroPage2(),
+              IntroPage3(),
             ],
           ),
           // Page Indicators
