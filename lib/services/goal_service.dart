@@ -2,19 +2,19 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 
-class ApiService {
-  static const String baseUrl = 'https://bob-server.vercel.app/assessments';
+class GoalService {
+  static const String baseUrl = 'https://bob-server.vercel.app/';
 
-  static Future<Map<String, dynamic>> fetchQuestions() async {
-    final response = await http.get(Uri.parse('$baseUrl/questions'));
+  static Future<Map<String, dynamic>> fetchGoals() async {
+    final response = await http.get(Uri.parse('$baseUrl/goals'));
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)['AssessmentQuestions'];
+      return jsonDecode(response.body)['Goals'];
     } else {
-      throw Exception('Failed to load questions');
+      throw Exception('Failed to load Goals');
     }
   }
 
-  static Future<void> submitResponses(List<Map<String, String>> responses, String userId) async {
+  static Future<void> submitGoals(List<Map<String, String>> responses, String userId) async {
     final data = {'answers': responses, 'userId': userId};
     final response = await http.post(
       Uri.parse('$baseUrl/questions'),

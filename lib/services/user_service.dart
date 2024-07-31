@@ -13,8 +13,9 @@ class UserService {
 
   static Future<String?> getToken() async{
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
+    return prefs.getString('x-token');
   }
+
 
   static Future<bool> register(String email, String password, String name) async {
     try {
