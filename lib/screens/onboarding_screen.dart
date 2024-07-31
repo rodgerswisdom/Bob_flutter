@@ -55,8 +55,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 controller: _controller,
                 count: 4,
                 effect: const SlideEffect(
-                    dotColor: Colors.white,
-                    dotWidth: 2.0,
+                    dotColor: Color(0xFF91ACE5),
+                    dotWidth: 4.0,
+                    dotHeight: 4.0,
                     activeDotColor: Color(0xFF2259AB)),
               )),
         ],

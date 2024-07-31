@@ -8,38 +8,46 @@ class IntroPage2 extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // Set a background color if needed
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center, // Center the content
           children: [
+            Spacer(flex: 2), // Add spacer at the top
             Container(
-              color: Colors
-                  .indigo, // To see the difference between the image's original size and the frame
-              height: 300,
-              width: 300,
+              // To see the difference between the image's original size and the frame
+              height: 100,
+              width: 100,
               child: Image.asset(
                 'assets/images/Group1.jpg', // Use SvgPicture.asset for SVG files
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
+            const SizedBox(
+                height: 100), // Adjust the space between the image and text
             const Text(
               'AI powered Insights',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color(0xFF2259AB),
                 fontFamily: 'Nunito',
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
               ),
             ),
-            const Text(
-              'Our AI analyzes your spending habits and suggest practical tips and strategies to help you save more.',
-              style: TextStyle(
-                fontFamily: 'Nunito',
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+            const SizedBox(
+                height: 10), // Adjust the space between the two texts
+            Container(
+              child: const Text(
+                'Our AI analyzes your spending habits and suggest practical tips and strategies to help you save more.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                ),
               ),
             ),
-            const SizedBox(height: 16), // Add some space at the bottom
+            Spacer(flex: 3), // Add spacer at the bottom
           ],
         ),
       ),
