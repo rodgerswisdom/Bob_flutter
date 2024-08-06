@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question_page.dart';
-import '../services/api_service.dart';
-import '../services/user_service.dart';
+import '../question_page.dart';
+import '../../services/api_service.dart';
+import '../../services/user_service.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});

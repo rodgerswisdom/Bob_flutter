@@ -1,8 +1,9 @@
+import 'package:bob/screens/assesments_screens/assesment0_screen.dart';
+import 'package:bob/screens/assesments_screens/assessment_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/assessment_screen.dart';
 import 'screens/onboarding_screen.dart';
 
 void main() {
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/home': (context) => const HomeScreen(),
         '/me': (context) => const ProfileScreen(),
-        '/assessment': (context) => const AssessmentScreen(),
+        '/assessment': (context) => const FinancialAssessmentOnboardingScreen(),
+        '/getassesment': (context) => const AssessmentScreen()
       },
     );
   }
