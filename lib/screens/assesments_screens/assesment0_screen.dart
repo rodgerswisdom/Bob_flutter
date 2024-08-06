@@ -13,8 +13,12 @@ class FinancialAssessmentOnboardingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF2259AB), // Your desired app bar color
-        title: const Text('Financial Assessment'), // App bar title
-        centerTitle: true,
+        toolbarHeight: 240,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
       ),
       body: const Padding(
         padding: EdgeInsets.all(16.0),
@@ -25,16 +29,16 @@ class FinancialAssessmentOnboardingScreen extends StatelessWidget {
             Text(
               'Financial Assessment',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Nunito',
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
               'One-time financial assessment required for personalized guidance. This quick assessment ensures a tailored experience for you.',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 24,
                 fontFamily: 'Nunito',
               ),
             ),
@@ -48,7 +52,7 @@ class FinancialAssessmentOnboardingScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () => _navigateToNextScreen(context),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF2259AB), // Button color
+              backgroundColor: const Color(0xFF2259AB), // Button color
               padding:
                   const EdgeInsets.symmetric(vertical: 15.0), // Button height
               textStyle: const TextStyle(
@@ -57,7 +61,11 @@ class FinancialAssessmentOnboardingScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            child: const Text('Let\'s Get Started'),
+            child: const Text(
+              'Let\'s Get Started',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),

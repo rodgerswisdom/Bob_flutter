@@ -13,6 +13,8 @@ class AssessmentScreen extends StatefulWidget {
 class _AssessmentScreenState extends State<AssessmentScreen> {
   Map<String, dynamic> _questions = {};
   final List<Map<String, String>> _userResponses = [];
+  bool _loading = true;
+  String _errorMessage = '';
 
   @override
   void initState() {
@@ -25,9 +27,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       final questions = await ApiService.fetchQuestions();
       setState(() {
         _questions = questions;
+        _loading = false;
       });
     } catch (e) {
-      // Handle error (e.g., show an error message)
+      setState(() {
+        _errorMessage = 'Failed to load questions. Please try again later.';
+        _loading = false;
+      });
     }
   }
 
@@ -43,28 +49,29 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       // Handle successful submission or navigate to a different screen
     } catch (e) {
       // Handle error (e.g., show an error message)
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Failed to submit responses. Please try again.')),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_questions.isEmpty) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('Assessment')),
-        body: const Center(child: CircularProgressIndicator()),
-      );
-    }
-
-    final questionIds = _questions.keys.toList();
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Assessment')),
-      body: QuestionPage(
-        questions: _questions,
-        questionIds: questionIds,
-        onAnswerSelected: _saveResponse,
-        onCompleted: _submitResponses,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
       ),
+      body: _loading
+          ? const Center(child: CircularProgressIndicator())
+          : _errorMessage.isNotEmpty
+              ? Center(child: Text(_errorMessage))
+              : QuestionPage(
+                  questions: _questions,
+                  questionIds: _questions.keys.toList(),
+                  onAnswerSelected: _saveResponse,
+                  onCompleted: _submitResponses,
+                ),
     );
   }
 }
