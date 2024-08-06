@@ -43,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
             bottom: Radius.circular(20),
           ),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
