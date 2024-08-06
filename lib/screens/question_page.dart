@@ -8,7 +8,7 @@ class QuestionPage extends StatefulWidget {
   final Function(String, String) onAnswerSelected;
   final Function onCompleted;
 
-  QuestionPage({
+  const QuestionPage({super.key, 
     required this.questions,
     required this.questionIds,
     required this.onAnswerSelected,
@@ -16,7 +16,7 @@ class QuestionPage extends StatefulWidget {
   });
 
   @override
-  _QuestionPageState createState() => _QuestionPageState();
+  State<QuestionPage> createState() => _QuestionPageState();
 }
 
 class _QuestionPageState extends State<QuestionPage> {
