@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../question_page.dart';
 import '../../services/api_service.dart';
-import '../../services/user_service.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -34,13 +33,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         _errorMessage = 'Failed to load questions. Please try again later.';
         _loading = false;
       });
- 
     }
   }
 
   void _saveResponse(String questionId, String answer) {
     setState(() {
-      _userResponses.removeWhere((response) => response['questionId'] == questionId);
+      _userResponses
+          .removeWhere((response) => response['questionId'] == questionId);
       _userResponses.add({'questionId': questionId, 'answer': answer});
     });
     print('questionId: $questionId, answer: $answer');
@@ -57,7 +56,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         const SnackBar(
             content: Text('Failed to submit responses. Please try again.')),
       );
- 
     }
   }
 
