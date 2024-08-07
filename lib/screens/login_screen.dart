@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Call your login API here
       final success = await UserService.login(email, password);
       if (success != null) {
-        Navigator.pushReplacementNamed(context, '/assessment');
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
         // Handle login failure
         ScaffoldMessenger.of(context).showSnackBar(
