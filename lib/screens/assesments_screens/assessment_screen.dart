@@ -48,8 +48,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   void _submitResponses() async {
     try {
       await ApiService.submitResponses(_userResponses);
-      // Handle successful submission or navigate to a different screen
+
       print('Responses submitted successfully');
+      // Handle successful submission or navigate to a different screen
+      Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
       // Handle error (e.g., show an error message)
       ScaffoldMessenger.of(context).showSnackBar(
