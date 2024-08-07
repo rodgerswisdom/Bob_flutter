@@ -12,8 +12,8 @@ class IntroPage2 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // Center the content
           children: [
-            Spacer(flex: 2), // Add spacer at the top
-            Container(
+            const Spacer(flex: 2), // Add spacer at the top
+            SizedBox(
               // To see the difference between the image's original size and the frame
               height: 100,
               width: 100,
@@ -47,7 +47,7 @@ class IntroPage2 extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(flex: 3), // Add spacer at the bottom
+            const Spacer(flex: 3), // Add spacer at the bottom
           ],
         ),
       ),

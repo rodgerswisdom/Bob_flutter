@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final token = prefs.getString('token');
 
     if (token != null) {
-      final userData = await UserService.getMe(token);
+      final userData = await UserService.getMe();
 
       setState(() {
         if (userData != null) {
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       final prefs = await SharedPreferences.getInstance();
                       final token = prefs.getString('token');
                       if (token != null) {
-                        final success = await UserService.logout(token);
+                        final success = await UserService.logout();
                         if (success) {
                           Navigator.pushReplacementNamed(context, '/login');
                         }

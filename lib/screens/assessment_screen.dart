@@ -28,21 +28,26 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       });
     } catch (e) {
       // Handle error (e.g., show an error message)
+      print('Error fetching questions: $e');
     }
   }
 
   void _saveResponse(String questionId, String answer) {
-    _userResponses.add({'questionId': questionId, 'answer': answer});
+    setState(() {
+      _userResponses.removeWhere((response) => response['questionId'] == questionId);
+      _userResponses.add({'questionId': questionId, 'answer': answer});
+    });
     print('questionId: $questionId, answer: $answer');
   }
 
   void _submitResponses() async {
     try {
-      final userId = await UserService.getUserId();
-      await ApiService.submitResponses(_userResponses, userId!);
+      await ApiService.submitResponses(_userResponses);
       // Handle successful submission or navigate to a different screen
+      print('Responses submitted successfully');
     } catch (e) {
       // Handle error (e.g., show an error message)
+      print('Error submitting responses: $e');
     }
   }
 
