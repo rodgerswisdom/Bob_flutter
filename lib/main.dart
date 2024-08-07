@@ -1,8 +1,10 @@
+import 'package:bob/screens/assesments_screens/assesment0_screen.dart';
+import 'package:bob/screens/assesments_screens/assessment_screen.dart';
+import 'package:bob/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/assessment_screen.dart';
 import 'screens/onboarding_screen.dart';
 
 void main() {
@@ -19,15 +21,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Nunito',
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontFamily: 'Nunito'),
+          bodyMedium: TextStyle(fontFamily: 'Nunito'),
+          displayLarge: TextStyle(fontFamily: 'Nunito'),
+          displayMedium: TextStyle(fontFamily: 'Nunito'),
+          displaySmall: TextStyle(fontFamily: 'Nunito'),
+          headlineMedium: TextStyle(fontFamily: 'Nunito'),
+          headlineSmall: TextStyle(fontFamily: 'Nunito'),
+          titleLarge: TextStyle(fontFamily: 'Nunito'),
+          titleMedium: TextStyle(fontFamily: 'Nunito'),
+          titleSmall: TextStyle(fontFamily: 'Nunito'),
+          bodySmall: TextStyle(fontFamily: 'Nunito'),
+          labelLarge: TextStyle(fontFamily: 'Nunito'),
+          labelSmall: TextStyle(fontFamily: 'Nunito'),
+        ),
       ),
-      initialRoute: '/login',
+      initialRoute: '/onboard',
       routes: {
-        '/login': (context) => const OnboardingScreen(),
+        '/onboard': (context) => const OnboardingScreen(),
+        '/login': (context) => LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
         '/me': (context) => const ProfileScreen(),
-        '/assessment': (context) => const AssessmentScreen(),
+        '/assessment': (context) => const FinancialAssessmentOnboardingScreen(),
+        '/getassesment': (context) => const AssessmentScreen()
       },
     );
   }
-} 
+}
