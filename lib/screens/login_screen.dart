@@ -51,10 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Column(
             children: [
-              Container(
+              const SizedBox(
                 height: 100,
                 width: double.infinity,
-                child: const Text(
+                child: Text(
                   'Hello, \nWelcome Back',
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF2259AB),
+                    backgroundColor: const Color(0xFF2259AB),
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     textStyle: const TextStyle(
                       fontFamily: 'Nunito',

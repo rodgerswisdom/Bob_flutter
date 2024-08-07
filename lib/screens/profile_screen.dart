@@ -22,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadUserData() async {
     final token = await UserService.getToken();
     if (token != null) {
-      final userData = await UserService.getMe(token);
+      final userData = await UserService.getMe();
       if (userData != null) {
         setState(() {
           _userData = userData;

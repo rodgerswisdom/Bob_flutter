@@ -11,12 +11,28 @@ class UserService {
     return prefs.getString('userId');
   }
 
-  static Future<String?> getToken() async{
+  // Get Token from Shared Preferences
+  static Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('x-token');
+    final token = prefs.getString('x-token');
+    print('Retrieved Token: $token');
+    return token;
   }
 
+  // Store Token in Shared Preferences
+  static Future<void> storeToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    print('Token stored: $token'); 
+    await prefs.setString('x-token', token);
+  }
 
+  // Print Token for debugging
+  static void printToken() async {
+    final token = await getToken();
+    print('Retrieved Token: $token');
+  }
+
+  // Register User
   static Future<bool> register(String email, String password, String name) async {
     try {
       final response = await http.post(
@@ -48,6 +64,7 @@ class UserService {
     }
   }
 
+  // Login User and Store Token
   static Future<Map<String, dynamic>?> login(String email, String password) async {
     try {
       final response = await http.post(
@@ -65,8 +82,7 @@ class UserService {
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         // Save token to shared preferences
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', responseBody['token']);
+        await storeToken(responseBody['token']);
         return responseBody;
       } else {
         final responseBody = json.decode(response.body);
@@ -80,8 +96,14 @@ class UserService {
     }
   }
 
-  static Future<bool> logout(String token) async {
+  // Logout User
+  static Future<bool> logout() async {
     try {
+      final token = await getToken();
+      if (token == null) {
+        throw Exception('No token available');
+      }
+
       final response = await http.post(
         Uri.parse('$baseUrl/users/logout'),
         headers: {
@@ -96,7 +118,7 @@ class UserService {
       if (response.statusCode == 200) {
         // Logout successful, remove token from shared preferences
         final prefs = await SharedPreferences.getInstance();
-        await prefs.remove('token');
+        await prefs.remove('x-token');
         return true;
       } else {
         final responseBody = json.decode(response.body);
@@ -110,8 +132,14 @@ class UserService {
     }
   }
 
-  static Future<Map<String, dynamic>?> getMe(String token) async {
+  // Get User Data
+  static Future<Map<String, dynamic>?> getMe() async {
     try {
+      final token = await getToken();
+      if (token == null) {
+        throw Exception('No token available');
+      }
+
       final response = await http.get(
         Uri.parse('$baseUrl/users/me'),
         headers: {
@@ -137,6 +165,4 @@ class UserService {
       return null;
     }
   }
-
-  
 }

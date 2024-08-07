@@ -33,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
               // Automatically navigate to the login screen when on the last page
               if (onLastPage) {
-                Future.delayed(Duration(milliseconds: 500), () {
+                Future.delayed(const Duration(milliseconds: 500), () {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
