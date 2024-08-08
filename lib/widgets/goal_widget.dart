@@ -1,4 +1,6 @@
+import 'dart:async'; // Required for Future
 import 'package:flutter/material.dart';
+import '../models/goal_model.dart';
 import '../services/goal_service.dart';
 
 class GoalsCard extends StatefulWidget {
@@ -9,55 +11,65 @@ class GoalsCard extends StatefulWidget {
 }
 
 class _GoalsCardState extends State<GoalsCard> {
+  late Future<List<Goal>> _goalsFuture;
 
+  @override
+  void initState() {
+    super.initState();
+    _goalsFuture = GoalService.fetchGoals(); // Fetch goals when the widget is initialized
+  }
 
-  
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 2,
-      padding: const EdgeInsets.all(16.0),
+      width: 165,
+      height: 195,
+      padding: const EdgeInsets.all(8.0),
       child: Card(
         elevation: 5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'User Goals',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ),
-            GoalItem(
-              title: 'Save for Emergency Fund',
-              description: 'Build an emergency fund of 1000',
-              dueDate: '2024-12-31',
-            ),
-            GoalItem(
-              title: 'Pay off Credit Card Debt',
-              description: 'Pay off 500 credit card debt',
-              dueDate: '2024-11-30',
-            ),
-            GoalItem(
-              title: 'Increase Savings Rate',
-              description: 'Increase savings rate to 20%',
-              dueDate: '2024-10-31',
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Implement editing functionality here
-                  showDialog(
-                    context: context,
-                    builder: (context) => const EditGoalsDialog(),
-                  );
-                },
-                child: const Text('Edit Goals'),
-              ),
-            ),
-          ],
+        child: FutureBuilder<List<Goal>>(
+          future: _goalsFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No goals found.'));
+            } else {
+              final goals = snapshot.data!;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Goals',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  ...goals.map((goal) => GoalItem(
+                    title: goal.title,
+                    description: goal.description,
+                    dueDate: goal.dueDate,
+                  )).toList(),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Implement editing functionality here
+                        showDialog(
+                          context: context,
+                          builder: (context) => const EditGoalsDialog(),
+                        );
+                      },
+                      child: const Text('Edit Goals'),
+                    ),
+                  ),
+                ],
+              );
+            }
+          },
         ),
       ),
     );
@@ -69,7 +81,7 @@ class GoalItem extends StatelessWidget {
   final String description;
   final String dueDate;
 
-  GoalItem({
+  const GoalItem({
     super.key,
     required this.title,
     required this.description,
@@ -79,7 +91,7 @@ class GoalItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -90,8 +102,10 @@ class GoalItem extends StatelessWidget {
           const SizedBox(height: 4.0),
           Text(description),
           const SizedBox(height: 4.0),
-          Text('Due Date: $dueDate',
-              style: Theme.of(context).textTheme.bodySmall),
+          Text(
+            'Due Date: $dueDate',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
           const Divider(),
         ],
       ),
