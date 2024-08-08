@@ -25,8 +25,15 @@ class GoalService {
     print('Status code in getGoals: ${response.statusCode}');
 
     if (response.statusCode == 200) {
-      final responseJson = jsonDecode(response.body) as List<dynamic>;
-      return responseJson.map((json) => Goal.fromJson(json as Map<String, dynamic>)).toList();
+      final responseJson = jsonDecode(response.body);
+
+      // Check if responseJson is a map and contains the list of goals
+      if (responseJson is Map<String, dynamic> && responseJson.containsKey('goals')) {
+        final goalsList = responseJson['goals'] as List<dynamic>;
+        return goalsList.map((json) => Goal.fromJson(json as Map<String, dynamic>)).toList();
+      } else {
+        throw Exception('Unexpected response format');
+      }
     } else {
       throw Exception('Failed to load goals: ${response.statusCode}');
     }
