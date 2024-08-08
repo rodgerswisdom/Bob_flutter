@@ -79,12 +79,12 @@ class _SavingsWidgetState extends State<SavingsWidget> {
       alignment: Alignment.centerRight,
       child: Container(
         width: 165,  // Width of the card
-        height: 195, // Height of the card
-        margin: const EdgeInsets.all(16.0),
+        height: 255, // Height of the card
+        margin: const EdgeInsets.all(8.0),
         child: Card(
           elevation: 5,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -126,7 +126,7 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                           _submitSavings();
                         },
                       ),
-                      const SizedBox(height: 16.0),
+                      const SizedBox(height: 8.0),
                       ElevatedButton(
                         onPressed: _submitSavings,
                         child: const Text('Update Savings'),
