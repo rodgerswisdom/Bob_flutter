@@ -68,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                     onPressed: () async {
                       final success = await UserService.logout();
-                      print('Logout Success: $success');
                       if (success) {
                         Navigator.pushReplacementNamed(context, '/login');
                       }
