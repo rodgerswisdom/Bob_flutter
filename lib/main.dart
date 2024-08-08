@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/me': (context) => const ProfileScreen(),
         '/assessment': (context) => const FinancialAssessmentOnboardingScreen(),
         '/getassesment': (context) => const AssessmentScreen(),
-        '/goals': (context) => const GoalWidget()
+        '/goals': (context) => const GoalsCard()
       },
     );
   }

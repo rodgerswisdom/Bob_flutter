@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 // import 'package:bob/widgets/goal_widget.dart';
+import 'package:bob/widgets/goal_widget.dart';
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,15 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 20),
-                  // const GoalWidget(
-
+                  const GoalsCard(),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     Navigator.pushNamed(context, '/assessment');
+                  //   },
+                  //   child: const Text('Start Assessment'),
                   // ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/assessment');
-                    },
-                    child: const Text('Start Assessment'),
-                  ),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
