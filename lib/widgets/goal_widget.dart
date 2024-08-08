@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
+import '../models/goal_model.dart';
 
 class GoalsCard extends StatelessWidget {
-  const GoalsCard({super.key});
+  final List<Goal> goals;
+
+  const GoalsCard({
+    super.key,
+    required this.goals,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 2,
-      padding: const EdgeInsets.all(16.0),
+      width: 165.0,
+      height: 195.0,
+      padding: const EdgeInsets.all(8.0),
       child: Card(
         elevation: 5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                'User Goals',
-                style: Theme.of(context).textTheme.titleLarge,
+                'Goals',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            const GoalItem(
-              title: 'Save for Emergency Fund',
-              description: 'Build an emergency fund of 1000',
-              dueDate: '2024-12-31',
-            ),
-            const GoalItem(
-              title: 'Pay off Credit Card Debt',
-              description: 'Pay off 500 credit card debt',
-              dueDate: '2024-11-30',
-            ),
-            const GoalItem(
-              title: 'Increase Savings Rate',
-              description: 'Increase savings rate to 20%',
-              dueDate: '2024-10-31',
+            Expanded(
+              child: ListView.builder(
+                itemCount: goals.length,
+                itemBuilder: (context, index) {
+                  final goal = goals[index];
+                  return GoalItem(goal: goal);
+                },
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // Implement editing functionality here
                   showDialog(
                     context: context,
-                    builder: (context) => const EditGoalsDialog(),
+                    builder: (context) => EditGoalsDialog(goals: goals),
                   );
                 },
                 child: const Text('Edit Goals'),
@@ -56,32 +56,28 @@ class GoalsCard extends StatelessWidget {
 }
 
 class GoalItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String dueDate;
+  final Goal goal;
 
-  const GoalItem({super.key, 
-    required this.title,
-    required this.description,
-    required this.dueDate,
+  const GoalItem({
+    super.key,
+    required this.goal,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium,
+            goal.title,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 4.0),
-          Text(description),
+          Text(goal.description, maxLines: 2, overflow: TextOverflow.ellipsis),
           const SizedBox(height: 4.0),
-          Text('Due Date: $dueDate', style: Theme.of(context).textTheme.bodySmall),
-          const Divider(),
+          Text('Due Date: ${goal.dueDate}', style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
     );
@@ -89,7 +85,12 @@ class GoalItem extends StatelessWidget {
 }
 
 class EditGoalsDialog extends StatelessWidget {
-  const EditGoalsDialog({super.key});
+  final List<Goal> goals;
+
+  const EditGoalsDialog({
+    super.key,
+    required this.goals,
+  });
 
   @override
   Widget build(BuildContext context) {

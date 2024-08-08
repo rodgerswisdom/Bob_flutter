@@ -9,19 +9,11 @@ class Goal {
     required this.dueDate,
   });
 
-   factory Goal.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'title': String title,
-        'description': String description,
-        'dueDate': String dueDate,
-      } =>
-        Goal(
-          title: title,
-          description: description,
-          dueDate: dueDate,
-        ),
-      _ => throw const FormatException('Failed to load Goal.'),
-    };
+  factory Goal.fromJson(Map<String, dynamic> json) {
+    return Goal(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      dueDate: json['dueDate'] as String,
+    );
   }
 }
