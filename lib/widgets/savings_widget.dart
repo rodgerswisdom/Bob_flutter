@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/savings_service.dart';
 
 class SavingsWidget extends StatefulWidget {
   const SavingsWidget({super.key});
@@ -10,14 +11,65 @@ class SavingsWidget extends StatefulWidget {
 class _SavingsWidgetState extends State<SavingsWidget> {
   double _savings = 0.0;
   final TextEditingController _amountController = TextEditingController();
+  bool _isLoading = false;
+  bool _isSuccess = false;
 
-  void _updateSavings() {
+  @override
+  void initState() {
+    super.initState();
+    _loadSavings();
+  }
+
+  Future<void> _loadSavings() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final savingsData = await SavingsService.fetchSavings();
+      setState(() {
+        _savings = savingsData['total'] ?? 0.0;
+        _isSuccess = false;
+      });
+    } catch (e) {
+      // Handle error
+      print('Error loading savings: $e');
+      setState(() {
+        _isSuccess = false;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _submitSavings() async {
     final amount = double.tryParse(_amountController.text) ?? 0.0;
+
     if (amount > 0) {
       setState(() {
-        _savings += amount;
-        _amountController.clear(); // Clear the input field
+        _isLoading = true;
       });
+
+      try {
+        await SavingsService.submitSavings({'amount': amount});
+        setState(() {
+          _savings += amount;
+          _isSuccess = true;
+          _amountController.clear();
+        });
+      } catch (e) {
+        // Handle error
+        print('Error submitting savings: $e');
+        setState(() {
+          _isSuccess = false;
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -43,22 +95,39 @@ class _SavingsWidgetState extends State<SavingsWidget> {
               ),
             ),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Enter amount',
-                border: OutlineInputBorder(),
+            if (_isLoading)
+              Center(
+                child: CircularProgressIndicator(),
+              )
+            else if (_isSuccess)
+              Center(
+                child: Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                  size: 40,
+                ),
+              )
+            else
+              Column(
+                children: [
+                  TextField(
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Enter amount',
+                      border: OutlineInputBorder(),
+                    ),
+                    onSubmitted: (value) {
+                      _submitSavings();
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  ElevatedButton(
+                    onPressed: _submitSavings,
+                    child: const Text('Update Savings'),
+                  ),
+                ],
               ),
-              onSubmitted: (value) {
-                _updateSavings();
-              },
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _updateSavings,
-              child: const Text('Update Savings'),
-            ),
           ],
         ),
       ),
