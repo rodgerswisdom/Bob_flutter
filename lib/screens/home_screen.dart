@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
 import '../widgets/savings_widget.dart';
+import '../widgets/modules_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,44 +41,49 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(title: const Text('Home')),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome, $_displayName!',
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/assessment');
-                    },
-                    child: const Text('Start Assessment'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/me'); // Navigate to profile
-                    },
-                    child: const Text('Profile'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final success = await UserService.logout();
-                      print('Logout Success: $success');
-                      if (success) {
-                        Navigator.pushReplacementNamed(context, '/login');
-                      }
-                    },
-                    child: const Text('Logout'),
-                  ),
-                  const SizedBox(height: 20), // Add spacing before SavingsWidget
-                  const SavingsWidget(), // Display SavingsWidget
-                ],
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome, $_displayName!',
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/assessment');
+                      },
+                      child: const Text('Start Assessment'),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, '/me'); // Navigate to profile
+                      },
+                      child: const Text('Profile'),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final success = await UserService.logout();
+                        print('Logout Success: $success');
+                        if (success) {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        }
+                      },
+                      child: const Text('Logout'),
+                    ),
+                    const SizedBox(height: 20),
+                    const SavingsWidget(), // Display SavingsWidget
+                    const SizedBox(height: 20),
+                    ModuleWidget(),
+                  ],
+                ),
               ),
             ),
     );
