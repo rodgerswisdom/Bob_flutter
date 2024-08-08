@@ -16,4 +16,15 @@ class Goal {
       dueDate: json['dueDate'] as String,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'dueDate': dueDate,
+    };
+  }
 }
+
+
+

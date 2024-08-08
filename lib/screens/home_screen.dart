@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 20),
-                  const GoalsCard(goals: [],),
+                  const GoalsCard(),
                   // ElevatedButton(
                   //   onPressed: () {
                   //     Navigator.pushNamed(context, '/assessment');
