@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -21,9 +21,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromRGBO(34, 89, 171,100),
+      backgroundColor: Color(0xFF2259AB),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,23 +32,24 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
               'BoB',
               style: TextStyle(
-                fontSize: 40,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 68,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                  fontFamily: 'Nunito'),
             ),
+            SizedBox(height: 2),
             Text(
               'Powered by Gemini',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 20,
                 color: Colors.white,
-                fontWeight: FontWeight.normal,
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w700,
               ),
-              ),
-            CircularProgressIndicator(),
+            ),
           ],
         ),
       ),
     );
-  } 
+  }
 }
