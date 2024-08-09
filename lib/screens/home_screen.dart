@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
+import '../widgets/goal_widget.dart';
 import '../widgets/savings_widget.dart';
 import '../widgets/modules_widget.dart';
 
@@ -84,6 +87,46 @@ class _HomeScreenState extends State<HomeScreen> {
                     const ModuleWidget(),
                   ],
                 ),
+          : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome, $_displayName!',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Row to display the cards side by side
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 255,
+                          child: GoalsCard(),
+                        ),
+                      ),
+                      SizedBox(width: 16.0),
+                      Expanded(
+                        child: SizedBox(
+                          height: 255,
+                          child: SavingsWidget(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/me'); // Navigate to profile
+                    },
+                    child: const Text('Profile'),
+                  ),
+                ],
               ),
             ),
     );
