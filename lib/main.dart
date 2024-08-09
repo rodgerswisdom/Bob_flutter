@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/onboarding_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'BoB Financial Literacy App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/onboard',
       routes: {
-        '/onboard': (context) => const OnboardingScreen(),
+        '/onboard': (context) => const SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
