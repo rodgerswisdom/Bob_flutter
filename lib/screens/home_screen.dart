@@ -1,13 +1,11 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
-import '../widgets/goal_widget.dart';
+import '../widgets/goal_widget.dart'; // Ensure the import path is correct
 import '../widgets/savings_widget.dart';
 import '../widgets/modules_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -43,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -53,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       'Welcome, $_displayName!',
                       style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
@@ -65,8 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, '/me'); // Navigate to profile
+                        Navigator.pushNamed(context, '/me'); // Navigate to profile
                       },
                       child: const Text('Profile'),
                     ),
@@ -82,51 +81,28 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: const Text('Logout'),
                     ),
                     const SizedBox(height: 20),
-                    const SavingsWidget(), // Display SavingsWidget
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 255,
+                            child: GoalsCard(), // Ensure GoalsCard is properly implemented
+                          ),
+                        ),
+                        SizedBox(width: 16.0),
+                        Expanded(
+                          child: SizedBox(
+                            height: 255,
+                            child: SavingsWidget(),
+                          ),
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 20),
                     const ModuleWidget(),
                   ],
                 ),
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome, $_displayName!',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  // Row to display the cards side by side
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 255,
-                          child: GoalsCard(),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      Expanded(
-                        child: SizedBox(
-                          height: 255,
-                          child: SavingsWidget(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/me'); // Navigate to profile
-                    },
-                    child: const Text('Profile'),
-                  ),
-                ],
               ),
             ),
     );
