@@ -99,7 +99,7 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 8.0),
                 if (_isLoading)
                   const Center(
                     child: CircularProgressIndicator(),
