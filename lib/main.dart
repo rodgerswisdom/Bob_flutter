@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/onboard',
       routes: {
-        '/onboard': (context) => const OnboardingScreen(),
+        '/onboard': (context) => const SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
