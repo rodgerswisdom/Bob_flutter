@@ -95,7 +95,7 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                 const SizedBox(height: 8.0),
                 Center(
                   child: Text(
-                    'Total: \$${_savings.toStringAsFixed(2)}',
+                    'Total: Ksh${_savings.toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
@@ -115,21 +115,25 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                 else
                   Column(
                     children: [
-                      TextField(
-                        controller: _amountController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Enter amount',
-                          border: OutlineInputBorder(),
+                      SizedBox(
+                        width: double.infinity, // Make TextField take full width
+                        child: TextField(
+                          controller: _amountController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                            labelText: 'Enter amount',
+                            border: OutlineInputBorder(),
+                          ),
+                          onSubmitted: (value) {
+                            _submitSavings();
+                          },
                         ),
-                        onSubmitted: (value) {
-                          _submitSavings();
-                        },
                       ),
                       const SizedBox(height: 8.0),
                       ElevatedButton(
                         onPressed: _submitSavings,
-                        child: const Text('Update Savings'),
+                        child: const Text('Add Savings'),
                       ),
                     ],
                   ),
