@@ -75,60 +75,71 @@ class _SavingsWidgetState extends State<SavingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16.0),
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Savings',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 8.0),
-            Center(
-              child: Text(
-                'Total: \$${_savings.toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            if (_isLoading)
-              Center(
-                child: CircularProgressIndicator(),
-              )
-            else if (_isSuccess)
-              Center(
-                child: Icon(
-                  Icons.check_circle,
-                  color: Colors.green,
-                  size: 40,
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        width: 165,  // Width of the card
+        height: 255, // Height of the card
+        margin: const EdgeInsets.all(8.0),
+        child: Card(
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Savings',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-              )
-            else
-              Column(
-                children: [
-                  TextField(
-                    controller: _amountController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Enter amount',
-                      border: OutlineInputBorder(),
+                const SizedBox(height: 8.0),
+                Center(
+                  child: Text(
+                    'Total: Ksh${_savings.toStringAsFixed(2)}',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                if (_isLoading)
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                else if (_isSuccess)
+                  const Center(
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 40,
                     ),
-                    onSubmitted: (value) {
-                      _submitSavings();
-                    },
+                  )
+                else
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity, // Make TextField take full width
+                        child: TextField(
+                          controller: _amountController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                            labelText: 'Enter amount',
+                            border: OutlineInputBorder(),
+                          ),
+                          onSubmitted: (value) {
+                            _submitSavings();
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      ElevatedButton(
+                        onPressed: _submitSavings,
+                        child: const Text('Add Savings'),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: _submitSavings,
-                    child: const Text('Update Savings'),
-                  ),
-                ],
-              ),
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );
