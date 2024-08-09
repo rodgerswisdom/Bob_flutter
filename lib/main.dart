@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'BoB Financial Literacy App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
