@@ -116,7 +116,7 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                   Column(
                     children: [
                       SizedBox(
-                        width: double.infinity, // Make TextField take full width
+                        width: double.infinity,
                         child: TextField(
                           controller: _amountController,
                           keyboardType: TextInputType.number,
