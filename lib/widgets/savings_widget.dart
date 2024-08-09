@@ -96,11 +96,11 @@ class _SavingsWidgetState extends State<SavingsWidget> {
             ),
             const SizedBox(height: 16.0),
             if (_isLoading)
-              Center(
+              const Center(
                 child: CircularProgressIndicator(),
               )
             else if (_isSuccess)
-              Center(
+              const Center(
                 child: Icon(
                   Icons.check_circle,
                   color: Colors.green,

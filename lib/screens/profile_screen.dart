@@ -108,8 +108,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final language = 'English'; // Default value for language
-    final theme = 'Light'; // Default value for theme
+    const language = 'English'; // Default value for language
+    const theme = 'Light'; // Default value for theme
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
@@ -155,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ListTile(
                     title: const Text('Language'),
-                    subtitle: Text(language),
+                    subtitle: const Text(language),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       // Handle language change here if needed
@@ -163,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ListTile(
                     title: const Text('Theme'),
-                    subtitle: Text(theme),
+                    subtitle: const Text(theme),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       // Handle theme change here if needed

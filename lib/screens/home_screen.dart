@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
                     const SavingsWidget(), // Display SavingsWidget
                     const SizedBox(height: 20),
-                    ModuleWidget(),
+                    const ModuleWidget(),
                   ],
                 ),
               ),

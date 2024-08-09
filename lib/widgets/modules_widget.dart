@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/modules_service.dart';
 
 class ModuleWidget extends StatefulWidget {
+  const ModuleWidget({super.key});
+
   @override
   State<ModuleWidget> createState() => _ModuleWidgetState();
 }
@@ -72,7 +74,7 @@ class _ModuleWidgetState extends State<ModuleWidget> {
         });
       }
     } else {
-      print('No cached module found for update');
+      print('No modules available');
       setState(() {
         _isLoading = false;
       });
