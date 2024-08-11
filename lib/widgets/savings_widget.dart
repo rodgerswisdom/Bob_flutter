@@ -95,7 +95,7 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                 const SizedBox(height: 8.0),
                 Center(
                   child: Text(
-                    'Total: Ksh${_savings.toStringAsFixed(2)}',
+                    'Ksh${_savings.toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../services/user_service.dart';
 
 class LoginScreen extends StatefulWidget {
-  @overrid: 
-  _LoginScreenState createState() => _LoginScreenState();
+  @override 
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
