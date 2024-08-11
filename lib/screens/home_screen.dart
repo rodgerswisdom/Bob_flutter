@@ -39,7 +39,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(
+        title: const Text('Home'),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (String value) {
+              switch (value) {
+                case 'Profile':
+                  Navigator.pushNamed(context, '/me');
+                  break;
+                case 'Start Assessment':
+                  Navigator.pushNamed(context, '/assessment');
+                  break;
+                case 'Logout':
+                  _logout();
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'Profile', 'Start Assessment', 'Logout'}
+                  .map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
+      ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -56,38 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/assessment');
-                      },
-                      child: const Text('Start Assessment'),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/me'); // Navigate to profile
-                      },
-                      child: const Text('Profile'),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final success = await UserService.logout();
-                        print('Logout Success: $success');
-                        if (success) {
-                          Navigator.pushReplacementNamed(context, '/login');
-                        }
-                      },
-                      child: const Text('Logout'),
-                    ),
-                    const SizedBox(height: 20),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: SizedBox(
                             height: 255,
-                            child: GoalsCard(), // Ensure GoalsCard is properly implemented
+                            child:
+                                GoalsCard(), // Ensure GoalsCard is properly implemented
                           ),
                         ),
                         SizedBox(width: 16.0),
@@ -106,5 +110,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
     );
+  }
+
+  Future<void> _logout() async {
+    final success = await UserService.logout();
+    print('Logout Success: $success');
+    if (success) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 }
