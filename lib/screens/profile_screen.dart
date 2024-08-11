@@ -206,6 +206,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
+            bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assessment),
+            label: 'Assessment',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.star),
+          //   label: 'Goals',
+          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: 0, // Set this according to your logic
+        selectedItemColor: Colors.blue[800],
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          // Handle navigation when an item is tapped
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/getassesment');
+              break;
+            // case 2:
+            //   Navigator.pushReplacementNamed(context, '/goals');
+            //   break;
+            case 2:
+              Navigator.pushReplacementNamed(context, '/me');
+              break;
+          }
+        },
+      ),
     );
   }
 }

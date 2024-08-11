@@ -6,11 +6,6 @@ class UserService {
   static const String baseUrl =
       'https://bob-server.vercel.app'; // Replace with your backend URL
 
-  // // Get User ID from Shared Preferences
-  // static Future<String?> getUserId() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   return prefs.getString('userId');
-  // }
 
   // Get Token from Shared Preferences
   static Future<String?> getToken() async {
@@ -86,7 +81,7 @@ class UserService {
         final responseBody = json.decode(response.body);
         String errorMessage =
             responseBody['error'] ?? 'An unknown error occurred';
-        print('Registration failed: $errorMessage');
+        // print('Registration failed: $errorMessage');
         return false;
       }
     } catch (e) {

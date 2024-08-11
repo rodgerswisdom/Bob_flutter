@@ -133,7 +133,7 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                       const SizedBox(height: 8.0),
                       ElevatedButton(
                         onPressed: _submitSavings,
-                        child: const Text('Add Savings'),
+                        child: const Text('Save'),
                       ),
                     ],
                   ),
