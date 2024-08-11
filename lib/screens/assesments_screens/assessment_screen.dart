@@ -66,6 +66,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        title: const Text('Assessment'),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
@@ -77,6 +78,46 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   onAnswerSelected: _saveResponse,
                   onCompleted: _submitResponses,
                 ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assessment),
+            label: 'Assessment',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.star),
+          //   label: 'Goals',
+          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: 1, // Set this according to your logic
+        selectedItemColor: Colors.blue[800],
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          // Handle navigation when an item is tapped
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/assessment');
+              break;
+            // case 2:
+            //   Navigator.pushReplacementNamed(context, '/goals');
+            //   break;
+            case 2:
+              Navigator.pushReplacementNamed(context, '/me');
+              break;
+          }
+        },
+      ),
     );
   }
 }

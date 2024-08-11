@@ -81,7 +81,7 @@ class UserService {
         final responseBody = json.decode(response.body);
         String errorMessage =
             responseBody['error'] ?? 'An unknown error occurred';
-        print('Registration failed: $errorMessage');
+        // print('Registration failed: $errorMessage');
         return false;
       }
     } catch (e) {

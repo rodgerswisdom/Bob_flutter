@@ -5,7 +5,7 @@ import '../widgets/savings_widget.dart';
 import '../widgets/modules_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -54,31 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/assessment');
-                      },
-                      child: const Text('Start Assessment'),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/me'); // Navigate to profile
-                      },
-                      child: const Text('Profile'),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final success = await UserService.logout();
-                        print('Logout Success: $success');
-                        if (success) {
-                          Navigator.pushReplacementNamed(context, '/login');
-                        }
-                      },
-                      child: const Text('Logout'),
                     ),
                     const SizedBox(height: 20),
                     const Row(
@@ -105,6 +80,46 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assessment),
+            label: 'Assessment',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.star),
+          //   label: 'Goals',
+          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: 0, // Set this according to your logic
+        selectedItemColor: Colors.blue[800],
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          // Handle navigation when an item is tapped
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/getassesment');
+              break;
+            // case 2:
+            //   Navigator.pushReplacementNamed(context, '/goals');
+            //   break;
+            case 2:
+              Navigator.pushReplacementNamed(context, '/me');
+              break;
+          }
+        },
+      ),
     );
   }
 }
