@@ -111,17 +111,21 @@ class _GoalsScreenState extends State<GoalsScreen> {
                       labelText: 'Due Date (YYYY-MM-DD)',
                       errorText: dateErrorMessage, // Show error message
                       filled: true,
-                      fillColor: dateErrorMessage != null ? Colors.red[50] : Colors.transparent,
+                      fillColor: dateErrorMessage != null
+                          ? Colors.red[50]
+                          : Colors.transparent,
                     ),
                     onChanged: (value) {
                       try {
                         dueDate = DateTime.parse(value);
                         setState(() {
-                          dateErrorMessage = null; // Clear the error message if date is valid
+                          dateErrorMessage =
+                              null; // Clear the error message if date is valid
                         });
                       } catch (_) {
                         setState(() {
-                          dateErrorMessage = 'Follow the right date format YYYY-MM-DD';
+                          dateErrorMessage =
+                              'Follow the right date format YYYY-MM-DD';
                         });
                       }
                     },
@@ -148,7 +152,9 @@ class _GoalsScreenState extends State<GoalsScreen> {
             ElevatedButton(
               child: const Text('Add'),
               onPressed: () async {
-                if (title.isNotEmpty && description.isNotEmpty && dateErrorMessage == null) {
+                if (title.isNotEmpty &&
+                    description.isNotEmpty &&
+                    dateErrorMessage == null) {
                   Navigator.of(context).pop(); // Close the dialog
 
                   final newGoal = Goal(
@@ -190,7 +196,8 @@ class _GoalsScreenState extends State<GoalsScreen> {
     );
 
     try {
-      await GoalService.updateGoal(updatedGoal.id!, updatedGoal.achieved); // Send updated goal to the backend
+      await GoalService.updateGoal(updatedGoal.id!,
+          updatedGoal.achieved); // Send updated goal to the backend
       setState(() {
         goals = goals.map((g) => g.id == goal.id ? updatedGoal : g).toList();
       });
@@ -238,7 +245,8 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 children: [
                   Text(
                     goal.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold), // Bold title
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold), // Bold title
                   ),
                   Text(goal.dueDate.split('T').first),
                 ],
@@ -281,7 +289,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assessment),
-            label: 'Assessment',
+            label: 'Savings',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
@@ -302,7 +310,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
               Navigator.pushReplacementNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushReplacementNamed(context, '/getassesment');
+              Navigator.pushReplacementNamed(context, '/savings');
               break;
             case 2:
               Navigator.pushReplacementNamed(context, '/goals');
