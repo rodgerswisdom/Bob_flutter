@@ -140,14 +140,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () => _showUpdateDialog('displayName'),
                     ),
                   ),
-                  ListTile(
-                    title: const Text('Phone Number'),
-                    subtitle: Text(_userData['phoneNumber'] ?? 'Not Set'),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () => _showUpdateDialog('phoneNumber'),
-                    ),
-                  ),
+                  // ListTile(
+                  //   title: const Text('Phone Number'),
+                  //   subtitle: Text(_userData['phoneNumber'] ?? 'Not Set'),
+                  //   trailing: IconButton(
+                  //     icon: const Icon(Icons.edit),
+                  //     onPressed: () => _showUpdateDialog('phoneNumber'),
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                   const Text(
                     'Preferences',
@@ -175,17 +175,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   ListTile(
-                    title: const Text('Questions'),
+                    title: const Text('Retake Assessment'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      // Handle viewing questions here if needed
+                      Navigator.pushNamed(context, '/getassesment');
                     },
                   ),
                   ListTile(
                     title: const Text('Your Answers'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      // Handle viewing answers here if needed
+                      Navigator.pushNamed(context, '/answers');
                     },
                   ),
                   const SizedBox(height: 20),
@@ -216,16 +216,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             icon: Icon(Icons.assessment),
             label: 'Assessment',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.star),
-          //   label: 'Goals',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Goals',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
-        currentIndex: 0, // Set this according to your logic
+        currentIndex: 3, // Set this according to your logic
         selectedItemColor: Colors.blue[800],
         unselectedItemColor: Colors.grey,
         onTap: (index) {
@@ -237,10 +237,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             case 1:
               Navigator.pushReplacementNamed(context, '/getassesment');
               break;
-            // case 2:
-            //   Navigator.pushReplacementNamed(context, '/goals');
-            //   break;
             case 2:
+              Navigator.pushReplacementNamed(context, '/goals');
+              break;
+            case 3:
               Navigator.pushReplacementNamed(context, '/me');
               break;
           }

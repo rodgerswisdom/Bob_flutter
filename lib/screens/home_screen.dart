@@ -52,92 +52,70 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  expandedHeight: 240.0,
-                  floating: true,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(
-                            0xFF2259AB), // User info box color with 50% opacity
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(20),
-                        ),
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 71, 124, 203), // User info box color
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor:
-                                  Colors.grey[300], // Placeholder avatar color
-                              child:
-                                  const Icon(Icons.person, color: Colors.white),
-                              radius: 30, // Avatar size
-                            ),
-                            const SizedBox(width: 20),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  _getGreeting(),
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                                Text(
-                                  _displayName,
-                                  style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[300],
+                            radius: 30, // Placeholder avatar color
+                            child: const Icon(Icons.person, color: Colors.white), // Avatar size
+                          ),
+                          const SizedBox(width: 20),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _getGreeting(),
+                                style: const TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                              Text(
+                                _displayName,
+                                style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  backgroundColor:
-                      const Color(0xFF2259AB), // Original AppBar color
-                ),
-                const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    const SizedBox(height: 20),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: SizedBox(
-                                height: 255,
-                                child:
-                                    GoalsCard(), // Ensure GoalsCard is properly implemented
-                              ),
-                            ),
-                            SizedBox(width: 16.0),
-                            Expanded(
-                              child: SizedBox(
-                                height: 255,
-                                child: SavingsWidget(),
-                              ),
-                            ),
-                          ],
+                        Expanded(
+                          child: SizedBox(
+                            height: 255,
+                            child: GoalsCard(), // Ensure GoalsCard is properly implemented
+                          ),
                         ),
-                        SizedBox(height: 20),
-                        ModuleWidget(),
+                        SizedBox(width: 16.0),
+                        Expanded(
+                          child: SizedBox(
+                            height: 255,
+                            child: SavingsWidget(),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
+                    const SizedBox(height: 20),
+                    const ModuleWidget(),
+                  ],
                 ),
-              ],
+              ),
             ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -148,6 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.assessment),
             label: 'Assessment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Goals',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -167,6 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushReplacementNamed(context, '/getassesment');
               break;
             case 2:
+              Navigator.pushReplacementNamed(context, '/goals');
+              break;
+            case 3:
               Navigator.pushReplacementNamed(context, '/me');
               break;
           }
