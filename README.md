@@ -7,7 +7,7 @@ BoB is an AI-driven financial literacy app designed to help users improve their 
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
+[Project Overview](#project-overview)
 - [Folder Structure](#folder-structure)
 - [Setup](#setup)
 - [API Endpoints](#api-endpoints)
