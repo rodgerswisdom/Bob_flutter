@@ -1,3 +1,4 @@
+import 'package:bob/screens/savings_screen.dart';
 import 'screens/assesments_screens/assesment0_screen.dart';
 import 'screens/assesments_screens/assessment_screen.dart';
 import 'screens/login_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/getassesment': (context) => const AssessmentScreen(),
         '/goals': (context) => const GoalsScreen(),
         '/answers': (context) => const AnswersScreen(),
+        '/savings': (context) => SavingsScreen(),
       },
     );
   }

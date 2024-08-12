@@ -205,7 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assessment),
-            label: 'Assessment',
+            label: 'Savings',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
@@ -226,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Navigator.pushReplacementNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushReplacementNamed(context, '/getassesment');
+              Navigator.pushReplacementNamed(context, '/savings');
               break;
             case 2:
               Navigator.pushReplacementNamed(context, '/goals');

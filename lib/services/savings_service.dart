@@ -21,42 +21,7 @@ class SavingsService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       print('Savings Data: $data');
-
-      final Map<String, dynamic> savingsData = data['data']['savings'] ?? {};
-      final List savingsList = savingsData.values.map((e) {
-        return e['savings'] is Map<String, dynamic> ? e['savings'] : {'amount': e['savings']};
-      }).toList();
-
-      final double total = savingsList.fold(0.0, (sum, item) {
-        final amount = item['amount'] ?? 0.0;
-        return sum + (amount is num ? amount.toDouble() : 0.0);
-      });
-
-      return {
-        'savings': savingsList,
-        'total': total,
-      };
-    } else {
-      throw Exception('Failed to load Savings');
-    }
-  }
-
-  static Future<Map<String, dynamic>> fetchSingleSavings(String savingsId) async {
-    final token = await UserService.getToken();
-    if (token == null) {
-      throw Exception('Token is Null');
-    }
-
-    final response = await http.get(
-      Uri.parse('$baseUrl/savings/$savingsId'),
-      headers: {
-        'Content-Type': 'application/json',
-        'x-token': token,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body)['Savings'];
+      return refineSavingsData(data);
     } else {
       throw Exception('Failed to load Savings');
     }
@@ -82,5 +47,53 @@ class SavingsService {
     if (response.statusCode != 201) {
       throw Exception('Failed to submit Savings');
     }
+  }
+
+  static Future<void> withdrawSavings(double amount) async {
+    final token = await UserService.getToken();
+    if (token == null) {
+      throw Exception('Token is Null');
+    }
+
+    final response = await http.post(
+      Uri.parse('$baseUrl/savings/remove'),
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': token,
+      },
+      body: jsonEncode({'amount': amount}),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to withdraw Savings');
+    }
+  }
+
+  static Map<String, dynamic> refineSavingsData(Map<String, dynamic> data) {
+    final Map<String, dynamic> savingsData = data['data']['savings'] ?? {};
+    final List<Map<String, dynamic>> savingsList = savingsData.entries.map((entry) {
+      final item = entry.value;
+      final transactionType = item['transactionType'];
+      final amount = item['savings'] is Map<String, dynamic>
+          ? item['savings']['amount']
+          : item['savings'];
+      final date = DateTime.fromMillisecondsSinceEpoch(item['setDate']['_seconds'] * 1000);
+
+      return {
+        'transactionType': transactionType,
+        'amount': amount.toDouble(),
+        'date': date,
+      };
+    }).toList();
+
+    final double total = savingsList.fold(0.0, (sum, item) {
+      final amount = item['amount'] ?? 0.0;
+      return sum + amount;
+    });
+
+    return {
+      'savings': savingsList,
+      'total': total,
+    };
   }
 }
