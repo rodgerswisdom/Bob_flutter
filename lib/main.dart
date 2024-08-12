@@ -1,12 +1,13 @@
 import 'package:bob/screens/assesments_screens/assesment0_screen.dart';
 import 'package:bob/screens/assesments_screens/assessment_screen.dart';
 import 'package:bob/screens/login_screen.dart';
-import 'package:bob/widgets/goal_widget.dart';
 import 'package:flutter/material.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/splash_screen.dart';
+import 'screens/goals_screen.dart';
+import 'screens/answers_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
         '/me': (context) => const ProfileScreen(),
         '/assessment': (context) => const FinancialAssessmentOnboardingScreen(),
         '/getassesment': (context) => const AssessmentScreen(),
-        '/goals': (context) => const GoalsCard()
+        '/goals': (context) => GoalsScreen(),
+        '/answers': (context) => AnswersScreen(),
       },
     );
   }

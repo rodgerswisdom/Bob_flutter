@@ -50,68 +50,56 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 240,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
-        backgroundColor: const Color(0xFF2259AB), // Original AppBar color
-        centerTitle: true, // Center the title content
-        title: Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: Color.fromARGB(
-                255, 71, 124, 203), // User info box color with 50% opacity
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                backgroundColor: Colors.grey[300], // Placeholder avatar color
-                child: const Icon(Icons.person, color: Colors.white),
-                radius: 30, // Avatar size
-              ),
-              const SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _getGreeting(),
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  Text(
-                    _displayName,
-                    style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : const SingleChildScrollView(
+          : SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20),
-                    Row(
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 71, 124, 203), // User info box color
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[300],
+                            radius: 30, // Placeholder avatar color
+                            child: const Icon(Icons.person, color: Colors.white), // Avatar size
+                          ),
+                          const SizedBox(width: 20),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _getGreeting(),
+                                style: const TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                              Text(
+                                _displayName,
+                                style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: SizedBox(
                             height: 255,
-                            child:
-                                GoalsCard(), // Ensure GoalsCard is properly implemented
+                            child: GoalsCard(), // Ensure GoalsCard is properly implemented
                           ),
                         ),
                         SizedBox(width: 16.0),
@@ -123,8 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    ModuleWidget(),
+                    const SizedBox(height: 20),
+                    const ModuleWidget(),
                   ],
                 ),
               ),
@@ -138,6 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.assessment),
             label: 'Assessment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Goals',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -157,6 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushReplacementNamed(context, '/getassesment');
               break;
             case 2:
+              Navigator.pushReplacementNamed(context, '/goals');
+              break;
+            case 3:
               Navigator.pushReplacementNamed(context, '/me');
               break;
           }

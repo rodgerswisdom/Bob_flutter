@@ -88,10 +88,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             icon: Icon(Icons.assessment),
             label: 'Assessment',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.star),
-          //   label: 'Goals',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Goals',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
@@ -109,10 +109,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             case 1:
               Navigator.pushReplacementNamed(context, '/assessment');
               break;
-            // case 2:
-            //   Navigator.pushReplacementNamed(context, '/goals');
-            //   break;
             case 2:
+              Navigator.pushReplacementNamed(context, '/goals');
+              break;
+            case 3:
               Navigator.pushReplacementNamed(context, '/me');
               break;
           }
