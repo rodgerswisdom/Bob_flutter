@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../services/user_service.dart';
 
 class LoginScreen extends StatefulWidget {
-  @override 
-  State<LoginScreen> createState() => _LoginScreenState();
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -36,52 +36,51 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2259AB),
-        toolbarHeight: 240,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 100,
-                width: double.infinity,
-                child: Text(
-                  'Hello, \nWelcome Back',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
+      resizeToAvoidBottomInset: true, // Ensures the screen resizes when the keyboard appears
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600), // Constrain the width to prevent it from being too wide
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+              crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
+              children: [
+                const SizedBox(
+                  height: 90,
+                  child: Text(
+                    'Hello, Welcome Back',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                    ),
                   ),
                 ),
-              ),
-              TextFormField(
-                controller: _emailController,
-                decoration:  const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _passwordController,
-                decoration:  InputDecoration(
-                  labelText: 'Password',
-                  suffixIcon: IconButton(
+                const SizedBox(height: 30), // Add spacing before the form fields
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(labelText: 'Email'),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          suffixIcon: IconButton(
                             icon: Icon(
                               _isPasswordVisible
                                   ? Icons.visibility
@@ -93,60 +92,66 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                           ),
+                        ),
+                        obscureText: !_isPasswordVisible,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 48),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2259AB),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            textStyle: const TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.5,
+                              fontSize: 18,
+                            ),
                           ),
-                obscureText: !_isPasswordVisible,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 48),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _login,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2259AB),
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    textStyle: const TextStyle(
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.5,
-                      fontSize: 18,
-                    ),
-                  ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: const TextStyle(color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: 'Sign up',
+                              style: const TextStyle(
+                                color: Color(0xFF2259AB), // Your theme color
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context, '/register');
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              RichText(
-                  text: TextSpan(
-                      text: "Don't have an account? ",
-                      style: const TextStyle(color: Colors.black),
-                      children: [
-                    TextSpan(
-                      text: 'Sign up',
-                      style: const TextStyle(
-                        color: Color(0xFF2259AB), // Your theme color
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                    ),
-                  ])),
-            ],
+              ],
+            ),
           ),
         ),
       ),

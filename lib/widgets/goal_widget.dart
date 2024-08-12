@@ -129,7 +129,7 @@ class _GoalsCardState extends State<GoalsCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Goals Progress',
+                'Goals',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 16.0),
@@ -152,7 +152,7 @@ class _GoalsCardState extends State<GoalsCard> {
                     const SizedBox(height: 16.0),
                     Center(
                       child: Text(
-                        'Achieved: $_achieved / $_total goals',
+                        'Achieved: $_achieved / $_total',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
@@ -162,11 +162,14 @@ class _GoalsCardState extends State<GoalsCard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GoalsScreen(),
+                            builder: (context) => const GoalsScreen(),
                           ),
                         );
                       },
-                      child: const Text('View Goals'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white, backgroundColor: Colors.blue, // Text color
+                      ),
+                      child: const Text('All'),
                     ),
                   ],
                 ),

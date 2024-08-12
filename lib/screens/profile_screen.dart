@@ -11,7 +11,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool _isLoading = true;
   Map<String, dynamic> _userData = {};
-  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -140,14 +139,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () => _showUpdateDialog('displayName'),
                     ),
                   ),
-                  // ListTile(
-                  //   title: const Text('Phone Number'),
-                  //   subtitle: Text(_userData['phoneNumber'] ?? 'Not Set'),
-                  //   trailing: IconButton(
-                  //     icon: const Icon(Icons.edit),
-                  //     onPressed: () => _showUpdateDialog('phoneNumber'),
-                  //   ),
-                  // ),
                   const SizedBox(height: 20),
                   const Text(
                     'Preferences',

@@ -157,9 +157,13 @@ class _SavingsWidgetState extends State<SavingsWidget> {
                 Column(
                   children: [
                     ElevatedButton(
-                      onPressed: _showAddSavingsDialog,
-                      child: const Text('Add Savings'),
-                    ),
+  onPressed: _showAddSavingsDialog,
+  style: ElevatedButton.styleFrom(
+    foregroundColor: Colors.white, backgroundColor: Colors.blue, // Sets the button's text color to white
+  ),
+  child: const Text('Save'),
+)
+
                   ],
                 ),
             ],

@@ -3,6 +3,8 @@ import '../services/goal_service.dart';
 import '../models/goal_model.dart';
 
 class GoalsScreen extends StatefulWidget {
+  const GoalsScreen({super.key});
+
   @override
   _GoalsScreenState createState() => _GoalsScreenState();
 }
@@ -41,7 +43,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
             children: [
               if (goal.achieved)
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   color: Colors.green[100],
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -52,15 +54,15 @@ class _GoalsScreenState extends State<GoalsScreen> {
                     ],
                   ),
                 ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text('Due Date: ${goal.dueDate}'),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text('Description: ${goal.description}'),
             ],
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -81,12 +83,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add a New Goal'),
+          title: const Text('Add a New Goal'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Title',
                 ),
                 onChanged: (value) {
@@ -94,7 +96,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 },
               ),
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                 ),
                 onChanged: (value) {
@@ -129,7 +131,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Text(
                         dateErrorMessage!,
-                        style: TextStyle(color: Colors.red),
+                        style: const TextStyle(color: Colors.red),
                       ),
                     ),
                 ],
@@ -138,13 +140,13 @@ class _GoalsScreenState extends State<GoalsScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
-              child: Text('Add'),
+              child: const Text('Add'),
               onPressed: () async {
                 if (title.isNotEmpty && description.isNotEmpty && dateErrorMessage == null) {
                   Navigator.of(context).pop(); // Close the dialog
@@ -207,12 +209,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
               'Add your first goal! 🎉',
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 _addNewGoalDialog();
               },
-              child: Text('Add a Goal'),
+              child: const Text('Add a Goal'),
             ),
           ],
         ),
@@ -223,7 +225,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
         itemBuilder: (context, index) {
           Goal goal = goals[index];
           return Card(
-            margin: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
             child: ListTile(
               leading: Checkbox(
                 value: goal.achieved,
@@ -236,7 +238,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 children: [
                   Text(
                     goal.title,
-                    style: TextStyle(fontWeight: FontWeight.bold), // Bold title
+                    style: const TextStyle(fontWeight: FontWeight.bold), // Bold title
                   ),
                   Text(goal.dueDate.split('T').first),
                 ],
@@ -262,14 +264,14 @@ class _GoalsScreenState extends State<GoalsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Goals'),
+        title: const Text('Goals'),
       ),
       body: _buildGoalsList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _addNewGoalDialog();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

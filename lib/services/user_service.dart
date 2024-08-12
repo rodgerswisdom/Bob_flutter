@@ -73,7 +73,7 @@ class UserService {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 201 || response.statusCode == 200) {
         // Registration successful
         return true;
       } else {

@@ -85,9 +85,8 @@ class _ModuleWidgetState extends State<ModuleWidget> {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(16.0),
-      elevation: 5,
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.black),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(
@@ -98,9 +97,12 @@ class _ModuleWidgetState extends State<ModuleWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Gemini AI', // Removed icon
-                  style: Theme.of(context).textTheme.titleLarge,
+                  'Today\'s Module',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
+
                 const SizedBox(height: 8.0),
                 _isLoading
                     ? const Center(
@@ -118,20 +120,16 @@ class _ModuleWidgetState extends State<ModuleWidget> {
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                 const SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
               ],
             ),
             Positioned(
-              bottom: 16.0,
-              left: 16.0,
-              child: IconButton(
-                icon: Icon(
-                  Icons.thumb_up,
-                  color: _isHelpful ? Colors.green : Colors.grey,
-                ),
-                onPressed: () {
-                  final newHelpfulStatus = !_isHelpful;
-                  _updateHelpfulStatus(newHelpfulStatus);
-                },
+              bottom: 4.0,
+              right: 16.0,
+              child: Image.asset(
+                'assets/images/google-gemini-icon.png',
+                height: 50,
+                width: 50,
               ),
             ),
           ],
