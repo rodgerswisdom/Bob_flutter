@@ -36,55 +36,75 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good morning';
+    } else if (hour < 17) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (String value) {
-              switch (value) {
-                case 'Profile':
-                  Navigator.pushNamed(context, '/me');
-                  break;
-                case 'Start Assessment':
-                  Navigator.pushNamed(context, '/assessment');
-                  break;
-                case 'Logout':
-                  _logout();
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return {'Profile', 'Start Assessment', 'Logout'}
-                  .map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
+        toolbarHeight: 240,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
-        ],
+        ),
+        backgroundColor: const Color(0xFF2259AB), // Original AppBar color
+        centerTitle: true, // Center the title content
+        title: Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Color.fromARGB(
+                255, 71, 124, 203), // User info box color with 50% opacity
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.grey[300], // Placeholder avatar color
+                child: const Icon(Icons.person, color: Colors.white),
+                radius: 30, // Avatar size
+              ),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _getGreeting(),
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  Text(
+                    _displayName,
+                    style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
+          : const SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Welcome, $_displayName!',
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Row(
+                    SizedBox(height: 20),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
@@ -103,8 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    const ModuleWidget(),
+                    SizedBox(height: 20),
+                    ModuleWidget(),
                   ],
                 ),
               ),
@@ -119,20 +139,16 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.assessment),
             label: 'Assessment',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.star),
-          //   label: 'Goals',
-          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
-        currentIndex: 0, // Set this according to your logic
+        currentIndex: 0, // Update this index based on the selected screen
         selectedItemColor: Colors.blue[800],
         unselectedItemColor: Colors.grey,
         onTap: (index) {
-          // Handle navigation when an item is tapped
+          // Handle navigation based on the selected index
           switch (index) {
             case 0:
               Navigator.pushReplacementNamed(context, '/home');
@@ -140,9 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
             case 1:
               Navigator.pushReplacementNamed(context, '/getassesment');
               break;
-            // case 2:
-            //   Navigator.pushReplacementNamed(context, '/goals');
-            //   break;
             case 2:
               Navigator.pushReplacementNamed(context, '/me');
               break;
